@@ -21,7 +21,7 @@ app.get("/thumb", (req, res) => {
     (err, result) => {
       if (err) console.log("err", err);
       console.log("result", result);
-      res.send({ data: err });
+      res.send({ data: result });
     }
   );
 });
