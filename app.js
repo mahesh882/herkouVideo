@@ -1,14 +1,17 @@
 const express = require("express");
 const ThumbnailGenerator = require("video-thumbnail-generator").default;
 const app = express();
+const path = require("path");
 
-app.get("/", (req, res) => {
+app.use(express.static(path.join(__dirname, "public")));
+app.set("view engine", "html");
+
+app.get("/thumb", (req, res) => {
   const tg = new ThumbnailGenerator({
     sourcePath: "./SampleVideo_1280x720_1mb.mp4",
-    thumbnailPath: "./thumbnails",
+    thumbnailPath: "./",
     tmpDir: "./" //only required if you can't write to /tmp/ and you need to generate gifs
   });
-
   tg.generateCb(
     {
       count: 1,
@@ -16,7 +19,7 @@ app.get("/", (req, res) => {
     },
     (err, result) => {
       if (err) console.log("err", err);
-      console.log(result);
+      console.log("result", result);
       res.send({ data: result });
     }
   );
