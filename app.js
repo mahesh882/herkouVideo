@@ -2,6 +2,7 @@ const express = require("express");
 const ThumbnailGenerator = require("video-thumbnail-generator").default;
 const app = express();
 const path = require("path");
+const PORT = process.env.PORT || 80;
 
 app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "html");
@@ -25,6 +26,6 @@ app.get("/thumb", (req, res) => {
   );
 });
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
   console.log("server started on port 3000");
 });
